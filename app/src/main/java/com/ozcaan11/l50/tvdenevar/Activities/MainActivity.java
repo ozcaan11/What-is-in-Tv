@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         assert tabsStrip != null;
         tabsStrip.setViewPager(viewPager);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
     }
