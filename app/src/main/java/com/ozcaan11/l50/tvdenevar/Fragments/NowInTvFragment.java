@@ -47,12 +47,16 @@ public class NowInTvFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.listView_now_in_tv);
 
-        new BringWhatsInTvNow().execute();
+        try {
+            new BringWhatsInTvNow().execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return view;
     }
 
-    private class BringWhatsInTvNow extends AsyncTask<Void,Void,Void>{
+    private class BringWhatsInTvNow extends AsyncTask<Void, Void, Void> {
 
 
         @Override
@@ -60,8 +64,8 @@ public class NowInTvFragment extends Fragment {
             super.onPreExecute();
 
             dialog = new ProgressDialog(getContext());
-            dialog.setTitle("Loading");
-            dialog.setMessage("Please wait ..");
+            dialog.setTitle("Please wait");
+            dialog.setMessage("Loading ..");
             dialog.setCancelable(false);
             dialog.setIndeterminate(false);
             dialog.show();
@@ -78,7 +82,7 @@ public class NowInTvFragment extends Fragment {
                     channel = new Channel();
                     channel.setProgram(e.select("a").text());
                     channel.setChannelUrl(e.select("a").attr("href"));
-                    channel.setIconUrl(URL_HOME+e.select("a").select("img").attr("src"));
+                    channel.setIconUrl(URL_HOME + e.select("a").select("img").attr("src"));
                     channel.setProgramTime(e.select("span").text());
 
                     channelArrayList.add(channel);
@@ -97,8 +101,7 @@ public class NowInTvFragment extends Fragment {
 
             channelArrayList.remove(0);
 
-
-            NowInTvAdapter adapter = new NowInTvAdapter(getContext(),channelArrayList);
+            NowInTvAdapter adapter = new NowInTvAdapter(getContext(), channelArrayList);
             listView.setAdapter(adapter);
 
             dialog.dismiss();

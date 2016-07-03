@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class BroadcastAdapter extends ArrayAdapter<Broadcast> {
     public BroadcastAdapter(Context context, ArrayList<Broadcast> arrayList) {
-        super(context, 0,arrayList);
+        super(context, 0, arrayList);
     }
 
     @Override

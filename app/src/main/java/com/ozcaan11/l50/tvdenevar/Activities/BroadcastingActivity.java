@@ -3,11 +3,10 @@ package com.ozcaan11.l50.tvdenevar.Activities;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +37,7 @@ public class BroadcastingActivity extends AppCompatActivity {
     Broadcast broadcast;
     String icon_e;
     String title_e;
+    String iUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +49,42 @@ public class BroadcastingActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView_bChannelBroadcast);
         title = (TextView) findViewById(R.id.textView_bChannelName);
         logo = (ImageView) findViewById(R.id.imageView_bChannelIcon);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        String url = getIntent().getStringExtra("ch_url");
+        iUrl = getIntent().getStringExtra("ch_url");
         try {
-            new BringBroadCast().execute(url);
+            new BringBroadCast().execute(iUrl);
         } catch (Exception e) {
             Toast.makeText(BroadcastingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_refresh) {
+            try {
+                new BringBroadCast().execute(iUrl);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private class BringBroadCast extends AsyncTask<String, Void, Void> {
@@ -108,7 +135,7 @@ public class BroadcastingActivity extends AppCompatActivity {
             BroadcastAdapter adapter = new BroadcastAdapter(getApplicationContext(), broadcastArrayList);
             listView.setAdapter(adapter);
 
-            Picasso.with(getApplicationContext()).load(URL_HOME+icon_e).into(logo);
+            Picasso.with(getApplicationContext()).load(URL_HOME + icon_e).into(logo);
             title.setText(title_e);
 
             dialog.dismiss();

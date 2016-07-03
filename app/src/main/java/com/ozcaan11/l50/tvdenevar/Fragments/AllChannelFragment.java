@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.ozcaan11.l50.tvdenevar.Adapters.AllChannelAdapter;
 import com.ozcaan11.l50.tvdenevar.Activities.BroadcastingActivity;
+import com.ozcaan11.l50.tvdenevar.Adapters.AllChannelAdapter;
 import com.ozcaan11.l50.tvdenevar.Classes.Channel;
 import com.ozcaan11.l50.tvdenevar.R;
 
@@ -53,8 +53,11 @@ public class AllChannelFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.listView_all_channels);
 
-        new BringAllChannel().execute();
-
+        try {
+            new BringAllChannel().execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -65,8 +68,8 @@ public class AllChannelFragment extends Fragment {
             super.onPreExecute();
 
             dialog = new ProgressDialog(getContext());
-            dialog.setTitle("Loading");
-            dialog.setMessage("Please wait ..");
+            dialog.setTitle("Please wait");
+            dialog.setMessage("Loading ..");
             dialog.setCancelable(false);
             dialog.setIndeterminate(false);
             dialog.show();
@@ -84,11 +87,9 @@ public class AllChannelFragment extends Fragment {
                     channel = new Channel();
                     channel.setName(e.text());
                     channel.setChannelUrl(e.attr("href"));
-                    channel.setIconUrl(URL_HOME+e.select("img").attr("src"));
+                    channel.setIconUrl(URL_HOME + e.select("img").attr("src"));
                     channelArrayList.add(channel);
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -105,10 +106,9 @@ public class AllChannelFragment extends Fragment {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //Toast.makeText(getContext(),URL_HOME+ channelArrayList.get(position).getChannelUrl(), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getContext(), BroadcastingActivity.class);
-                    intent.putExtra("ch_url",channelArrayList.get(position).getChannelUrl());
+                    intent.putExtra("ch_url", channelArrayList.get(position).getChannelUrl());
                     startActivity(intent);
                 }
             });

@@ -14,7 +14,7 @@ import com.ozcaan11.l50.tvdenevar.Fragments.NowInTvFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[] { "Now In Tv", "All Channels" };
+    private String tabTitles[] = new String[]{"Now In Tv", "All Channels"};
 
     public PagerAdapter(FragmentManager fm) {
         super(fm);
@@ -27,7 +27,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new NowInTvFragment();
             case 1:

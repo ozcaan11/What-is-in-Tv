@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.ozcaan11.l50.tvdenevar.Adapters.PagerAdapter;
@@ -25,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
-
         tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-
-        assert tabsStrip != null;
         tabsStrip.setViewPager(viewPager);
 
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -51,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_refresh) {
+            Toast.makeText(MainActivity.this, "Still working on it!", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
