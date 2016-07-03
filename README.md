@@ -2,6 +2,13 @@
 What is in Tv now?
 
 ----
+### Trying gif :)
+
+First scene | Second scene |
+------------ | ------------ |
+![](screenshots/awesome_app_1.gif) | ![](screenshots/awesome_app_2.gif) | 
+
+----
 
 ### Screenshots
 
@@ -13,3 +20,4 @@ What is in Tv now?
 [Broadcast](app/src/main/java/com/ozcaan11/l50/tvdenevar/Activities/BroadcastingActivity.java) |
 -------------|
 ![](screenshots/main - 3.png)| 
+
